@@ -11,6 +11,7 @@ public class MagicSquare {
         System.out.println(isLegalMagicSquare("./src/P1/txt/3.txt"));
         System.out.println(isLegalMagicSquare("./src/P1/txt/4.txt"));
         System.out.println(isLegalMagicSquare("./src/P1/txt/5.txt"));
+        generateMagicSquare(21);
     }
 
     private static boolean isLegalMagicSquare(String fileName) {
@@ -26,13 +27,13 @@ public class MagicSquare {
             int width = line.split("\t").length;
             while (line != null) {
                 String[] ParseNum = line.split("\t");
-                if(width!=ParseNum.length){
+                if (width != ParseNum.length) {
                     System.out.println("The column number is different");
                     return false;
                 }
                 for (int i = 0; i < ParseNum.length; i++) {
                     int temp = Integer.parseInt(ParseNum[i]);
-                    if(temp<=0){
+                    if (temp <= 0) {
                         System.out.println("Exist Non-positive number in square");
                         return false;
                     }
@@ -42,14 +43,14 @@ public class MagicSquare {
                     if (i == count) {
                         DiagonalNegative += temp;
                     }
-                    if (i + count +1 == ParseNum.length) {
+                    if (i + count + 1 == ParseNum.length) {
                         DiagonalPositive += temp;
                     }
                 }
                 count++;
                 line = content.readLine();
             }
-            if(count!=width){
+            if (count != width) {
                 System.out.println("The row number is different");
                 return false;
             }
@@ -77,8 +78,34 @@ public class MagicSquare {
         return false;
     }
 
-    static void generateMagicSquare(int n) {
-
+    static boolean generateMagicSquare(int n) {
+        int magic[][] = new int[n][n];
+        int row = 0, col = n / 2, i, j, square = n * n;
+        for (i = 1; i <= square; i++) {
+            magic[row][col] = i;
+            if (i % n == 0)
+                row++;
+            else {
+                if (row == 0) row = n - 1;
+                else row--;
+                if (col == (n - 1)) col = 0;
+                else col++;
+            }
+        }
+        File file = new File("src/P1/txt/6.txt");
+        try {
+            FileWriter writer = new FileWriter(file);
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < n; j++)
+                    writer.write(magic[i][j] + "\t", 0, (magic[i][j] + "\t").length());
+                writer.write('\n');
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }

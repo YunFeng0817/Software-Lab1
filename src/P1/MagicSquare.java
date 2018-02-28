@@ -23,21 +23,35 @@ public class MagicSquare {
         try {
             BufferedReader content = new BufferedReader(new FileReader(fileName));
             String line = content.readLine();
+            int width = line.split("\t").length;
             while (line != null) {
                 String[] ParseNum = line.split("\t");
+                if(width!=ParseNum.length){
+                    System.out.println("The column number is different");
+                    return false;
+                }
                 for (int i = 0; i < ParseNum.length; i++) {
-                    MagicSquare[count][i] = Integer.parseInt(ParseNum[i]);
-                    RowSum[count] += MagicSquare[count][i];
-                    ColumnSum[i] += MagicSquare[count][i];
+                    int temp = Integer.parseInt(ParseNum[i]);
+                    if(temp<=0){
+                        System.out.println("Exist Non-positive number in square");
+                        return false;
+                    }
+                    MagicSquare[count][i] = temp;
+                    RowSum[count] += temp;
+                    ColumnSum[i] += temp;
                     if (i == count) {
-                        DiagonalNegative += MagicSquare[count][i];
+                        DiagonalNegative += temp;
                     }
                     if (i + count +1 == ParseNum.length) {
-                        DiagonalPositive += MagicSquare[count][i];
+                        DiagonalPositive += temp;
                     }
                 }
                 count++;
                 line = content.readLine();
+            }
+            if(count!=width){
+                System.out.println("The row number is different");
+                return false;
             }
             boolean flag = true;
             for (int i = 0; i < count - 1; i++) {

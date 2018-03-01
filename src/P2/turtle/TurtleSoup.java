@@ -128,11 +128,13 @@ public class TurtleSoup {
      */
     public static List<Double> calculateHeadings(List<Integer> xCoords, List<Integer> yCoords) {
         List<Double> headingToPointList = new ArrayList<>();
-        double tempHeading = 0.0;
+        double tempHeading = 0.0, startHeading = 0.0;
         for (int i = 0; i < xCoords.size() - 1; i++) {
-            tempHeading = calculateHeadingToPoint(tempHeading, xCoords.get(i), yCoords.get(i),
+            tempHeading = calculateHeadingToPoint(startHeading, xCoords.get(i), yCoords.get(i),
                     xCoords.get(i + 1), yCoords.get(i + 1));
             headingToPointList.add(tempHeading);
+            startHeading += tempHeading;
+            startHeading = startHeading % 360;
         }
         return headingToPointList;
     }
@@ -157,13 +159,35 @@ public class TurtleSoup {
                 PenColor.CYAN,
                 PenColor.BLUE,
                 PenColor.MAGENTA};
-        turtle.turn(180);
+        turtle.turn(147);
         for (int i = 0; i < 10; i++) {
-            turtle.color(colorList[9-i]);
+            turtle.color(colorList[9 - i]);
             for (int j = 0; j < 20; j++) {
                 drawRegularPolygon(turtle, 89, i);
-                turtle.turn(i % 2 == 0 ? 11 : -11);
+                turtle.turn(i % 2 == 0 ? 12 : -12);
             }
+        }
+        turtle.turn(-147);
+        List<Integer> turnPointx = new ArrayList<>(), turnPointy = new ArrayList<>();
+        List<Double> turnAngel;
+        turnPointx.add(0);
+        turnPointx.add(-5);
+        turnPointx.add(-5);
+        turnPointx.add(5);
+        turnPointx.add(5);
+        turnPointx.add(0);
+        turnPointy.add(0);
+        turnPointy.add(0);
+        turnPointy.add(-250);
+        turnPointy.add(-250);
+        turnPointy.add(0);
+        turnPointy.add(0);
+        turnAngel = calculateHeadings(turnPointx, turnPointy);
+        double distance;
+        for (int i = 0; i < turnPointx.size()-1; i++) {
+            distance = Math.sqrt(((turnPointx.get(i+1)- turnPointx.get(i))*(turnPointx.get(i+1)- turnPointx.get(i)) + (turnPointy.get(i+1)- turnPointy.get(i)) * (turnPointy.get(i+1)- turnPointy.get(i))));
+            turtle.turn(turnAngel.get(i));
+            turtle.forward((int) distance);
         }
     }
 

@@ -18,5 +18,6 @@ public enum PenColor {
     GREEN,
     CYAN,
     BLUE,
-    MAGENTA;
+    MAGENTA,
+    WHITE
 }

@@ -44,6 +44,7 @@ public class TurtleGUI extends JFrame {
         PEN_COLORS.put(PenColor.CYAN, Color.CYAN);
         PEN_COLORS.put(PenColor.BLUE, Color.BLUE);
         PEN_COLORS.put(PenColor.MAGENTA, Color.MAGENTA);
+        PEN_COLORS.put(PenColor.WHITE, Color.WHITE);
     }
 
     private static final double LENGTH_OF_A_TURN = 20;

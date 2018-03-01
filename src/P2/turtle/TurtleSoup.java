@@ -157,11 +157,12 @@ public class TurtleSoup {
                 PenColor.CYAN,
                 PenColor.BLUE,
                 PenColor.MAGENTA};
+        turtle.turn(180);
         for (int i = 0; i < 10; i++) {
             turtle.color(colorList[9-i]);
             for (int j = 0; j < 20; j++) {
                 drawRegularPolygon(turtle, 89, i);
-                turtle.turn(i % 2 == 0 ? 18 : -18);
+                turtle.turn(i % 2 == 0 ? 11 : -11);
             }
         }
     }

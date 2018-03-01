@@ -85,7 +85,31 @@ public class TurtleSoup {
      */
     public static double calculateHeadingToPoint(double currentHeading, int currentX, int currentY,
                                                  int targetX, int targetY) {
-        throw new RuntimeException("implement me!");
+        int offsetX = targetX - currentX, offsetY = targetY - currentY;
+        double targetHeading;
+        final double angel = 180 * (Math.atan(offsetY / (double) offsetX)) / Math.PI;
+        if (offsetX > 0) {
+            if (offsetY == 0) {
+                targetHeading = 90;
+            } else {
+                targetHeading = 90 - angel;
+            }
+        } else if (offsetX == 0) {
+            if (offsetY > 0) {
+                targetHeading = 0;
+            } else if (offsetY < 0) {
+                targetHeading = 180;
+            } else {
+                return 0;
+            }
+        } else {
+            if (offsetY == 0) {
+                targetHeading = 270;
+            } else {
+                targetHeading = 270 - angel;
+            }
+        }
+        return (targetHeading - currentHeading) >= 0 ? (targetHeading - currentHeading) : 360 + (targetHeading - currentHeading);
     }
 
     /**
@@ -103,7 +127,14 @@ public class TurtleSoup {
      * otherwise of size (# of points) - 1
      */
     public static List<Double> calculateHeadings(List<Integer> xCoords, List<Integer> yCoords) {
-        throw new RuntimeException("implement me!");
+        List<Double> headingToPointList = new ArrayList<>();
+        double tempHeading = 0.0;
+        for (int i = 0; i < xCoords.size() - 1; i++) {
+            tempHeading = calculateHeadingToPoint(tempHeading, xCoords.get(i), yCoords.get(i),
+                    xCoords.get(i + 1), yCoords.get(i + 1));
+            headingToPointList.add(tempHeading);
+        }
+        return headingToPointList;
     }
 
     /**

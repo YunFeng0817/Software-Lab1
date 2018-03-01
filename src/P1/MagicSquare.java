@@ -1,17 +1,23 @@
 package P1;
 
 import java.io.*;
+import java.sql.Time;
+import java.util.Timer;
 
 public class MagicSquare {
 
     public static void main(String[] args) {
         // TODO
-        System.out.println(isLegalMagicSquare("./src/P1/txt/1.txt"));
-        System.out.println(isLegalMagicSquare("./src/P1/txt/2.txt"));
-        System.out.println(isLegalMagicSquare("./src/P1/txt/3.txt"));
-        System.out.println(isLegalMagicSquare("./src/P1/txt/4.txt"));
-        System.out.println(isLegalMagicSquare("./src/P1/txt/5.txt"));
-        generateMagicSquare(21);
+        System.out.println("1.txt\t" + isLegalMagicSquare("./src/P1/txt/1.txt"));
+        System.out.println("2.txt\t" + isLegalMagicSquare("./src/P1/txt/2.txt"));
+        System.out.println("3.txt\t" + isLegalMagicSquare("./src/P1/txt/3.txt"));
+        System.out.println("4.txt\t" + isLegalMagicSquare("./src/P1/txt/4.txt"));
+        System.out.println("5.txt\t" + isLegalMagicSquare("./src/P1/txt/5.txt"));
+        if (generateMagicSquare((int)(Math.random() * 1000))) {
+            System.out.println("6.txt\t" + isLegalMagicSquare("./src/P1/txt/6.txt"));
+        } else {
+            System.out.println(false);
+        }
     }
 
     private static boolean isLegalMagicSquare(String fileName) {
@@ -79,6 +85,14 @@ public class MagicSquare {
     }
 
     static boolean generateMagicSquare(int n) {
+        if (n <= 0) {
+            System.out.println("Error! The input number n can't be a Non-positive number");
+            return false;
+        }
+        if (n % 2 == 0) {
+            System.out.println("Error! The input number can't be an even number");
+            return false;
+        }
         int magic[][] = new int[n][n];
         int row = 0, col = n / 2, i, j, square = n * n;
         for (i = 1; i <= square; i++) {

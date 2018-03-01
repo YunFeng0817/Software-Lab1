@@ -178,8 +178,8 @@ public class TurtleSoup {
         turnPointx.add(0);
         turnPointy.add(0);
         turnPointy.add(0);
-        turnPointy.add(-250);
-        turnPointy.add(-250);
+        turnPointy.add(-300);
+        turnPointy.add(-300);
         turnPointy.add(0);
         turnPointy.add(0);
         turnAngel = calculateHeadings(turnPointx, turnPointy);

@@ -148,6 +148,7 @@ public class TurtleSoup {
      * @param turtle the turtle context
      */
     public static void drawPersonalArt(Turtle turtle) {
+        final double INIT_ANGEL = 147;
         PenColor[] colorList = {
                 PenColor.RED,
                 PenColor.PINK,
@@ -159,7 +160,10 @@ public class TurtleSoup {
                 PenColor.CYAN,
                 PenColor.BLUE,
                 PenColor.MAGENTA};
-        turtle.turn(147);
+        turtle.turn(INIT_ANGEL);
+        /*
+         *control the animation of the circle painting
+         */
         for (int i = 0; i < 10; i++) {
             turtle.color(colorList[9 - i]);
             for (int j = 0; j < 20; j++) {
@@ -168,6 +172,9 @@ public class TurtleSoup {
             }
         }
         turtle.turn(-147);
+        /*
+         *create the square in the bottom of the painting
+         */
         List<Integer> turnPointx = new ArrayList<>(), turnPointy = new ArrayList<>();
         List<Double> turnAngel;
         turnPointx.add(0);

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class FriendshipGraph {
 
     final int NOT_IN_GRAPH = -1;
-    public ArrayList<ArrayList> Graph = new ArrayList<>();
+    private ArrayList<ArrayList> Graph = new ArrayList<>();
     private int personNum = 0;
 
     public static void main(String[] argv) {

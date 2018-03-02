@@ -30,6 +30,7 @@ public class FriendshipGraph {
         System.out.println(graph.getDistance(rachel, kramer));
     }
 
+    /* add new person to the FriendshipGraph */
     public void addVertex(Person newPerson) {
         if (newPerson.getId() == NOT_IN_GRAPH) {
             ArrayList<Boolean> add = new ArrayList<Boolean>();
@@ -46,10 +47,12 @@ public class FriendshipGraph {
         }
     }
 
+    /* add directive direction between the two person : personA and personB */
     public void addEdge(Person personA, Person personB) {
         Graph.get(personA.getId()).set(personB.getId(), true);
     }
 
+    /* get distance between the two person : personA and personB */
     public int getDistance(Person personA, Person personB) {
         if (personA == personB)
             return 0;

@@ -33,7 +33,11 @@ public class FriendshipGraph {
         System.out.println(graph.getDistance(rachel, kramer));
     }
 
-    /* add new person to the FriendshipGraph */
+    /**
+     * add new person to the FriendshipGraph
+     *
+     * @param newPerson the person of the new one
+     */
     public void addVertex(Person newPerson) {
         if (newPerson.getId() == NOT_IN_GRAPH) {
             if (this.nameSet.contains(newPerson.getName())) {
@@ -55,22 +59,34 @@ public class FriendshipGraph {
         }
     }
 
-    /* add directive direction between the two person : personA and personB */
+    /**
+     * add directive direction between the two person
+     *
+     * @param personA the first person
+     * @param personB the second person
+     */
     public void addEdge(Person personA, Person personB) {
         Graph.get(personA.getId()).set(personB.getId(), true);
     }
 
-    /* get distance between the two person : personA and personB */
+    /**
+     * get distance between the two person
+     *
+     * @param personA the first person
+     * @param personB the second person
+     * @return the value of the distance
+     */
     public int getDistance(Person personA, Person personB) {
         if (personA == personB)
             return 0;
-        Queue<Integer> BSQueue = new LinkedList<>();
-        boolean[] visited = new boolean[this.personNum];
+        Queue<Integer> BSQueue = new LinkedList<>();  // record the persons' id to be visit
+        boolean[] visited = new boolean[this.personNum]; // record every person if has been visited
         for (int i = 1; i < this.personNum; i++) {
             visited[i] = false;
         }
         BSQueue.offer(personA.getId());
         visited[0] = true;
+        /* record the begin(front) id and the end(rear) id of each BS floor */
         int count = 1, front = BSQueue.element(), rear = BSQueue.element();
         while (!BSQueue.isEmpty()) {
             for (int i = 0; i < this.personNum; i++) {
@@ -86,6 +102,7 @@ public class FriendshipGraph {
                 }
             }
 
+            /* judge if one BS floor has been visited */
             if (BSQueue.poll() == rear) {
                 count++;
                 rear = front;

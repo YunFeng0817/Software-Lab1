@@ -51,7 +51,7 @@ public class FriendshipGraph {
     }
 
     public int getDistance(Person personA, Person personB) {
-        if(personA==personB)
+        if (personA == personB)
             return 0;
         Queue<Integer> BSQueue = new LinkedList<>();
         boolean[] visited = new boolean[this.personNum];
@@ -60,16 +60,17 @@ public class FriendshipGraph {
         }
         BSQueue.offer(personA.getId());
         visited[0] = true;
-        int count = 0, front = BSQueue.element(), rear = BSQueue.element();
+        int count = 1, front = BSQueue.element(), rear = BSQueue.element();
         while (!BSQueue.isEmpty()) {
             for (int i = 0; i < this.personNum; i++) {
-                if(Graph.get(BSQueue.element()).get(i).equals(true)){
+                if (Graph.get(BSQueue.element()).get(i).equals(true)) {
                     if (i == personB.getId()) {
                         return count;
                     }
                     if (!visited[i]) {
                         front = i;
                         visited[i] = true;
+                        BSQueue.offer(i);
                     }
                 }
             }

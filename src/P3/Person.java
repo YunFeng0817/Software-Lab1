@@ -4,15 +4,23 @@ public class Person {
     private String name = "";
     private int id = -1;
 
-    public Person(String name){
-        this.name  = name;
+    /* init function of the class Person */
+    public Person(String name) {
+        this.name = name;
     }
 
-    public void setId(int id){
+    /* set the private field id of this class */
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getId(){
+    /* get the private field id of this class */
+    public int getId() {
         return this.id;
+    }
+
+    /* get the private field name of this class */
+    public String getName() {
+        return this.name;
     }
 }

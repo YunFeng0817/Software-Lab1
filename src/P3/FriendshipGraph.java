@@ -1,14 +1,17 @@
 package P3;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.HashSet;
 
 public class FriendshipGraph {
 
-    final int NOT_IN_GRAPH = -1;
+    private final int NOT_IN_GRAPH = -1;
     private ArrayList<ArrayList> Graph = new ArrayList<>();
     private int personNum = 0;
+    private HashSet nameSet = new HashSet();
 
     public static void main(String[] argv) {
         FriendshipGraph graph = new FriendshipGraph();
@@ -33,6 +36,10 @@ public class FriendshipGraph {
     /* add new person to the FriendshipGraph */
     public void addVertex(Person newPerson) {
         if (newPerson.getId() == NOT_IN_GRAPH) {
+            if (this.nameSet.contains(newPerson.getName())) {
+                System.out.println("The new person's name '" + newPerson.getName() + "' had been in the friendship graph");
+                System.exit(0);
+            }
             ArrayList<Boolean> add = new ArrayList<Boolean>();
             for (int i = 0; i < this.personNum; i++) {
                 add.add(false);
@@ -41,6 +48,7 @@ public class FriendshipGraph {
             add.add(true);
             Graph.add(add);
             this.personNum++;
+            this.nameSet.add(newPerson.getName());
             newPerson.setId(this.personNum - 1);
         } else {
             System.out.println("this person has been in the friendship Graph");

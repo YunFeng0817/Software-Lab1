@@ -68,7 +68,6 @@ public class Extract {
                     MentionedUsers.add(matcher.group().substring(2).toLowerCase());
             }
         }
-        System.out.println(MentionedUsers);
         return MentionedUsers;
     }
 

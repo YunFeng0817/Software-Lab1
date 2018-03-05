@@ -3,6 +3,7 @@
  */
 package P4.twitter;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -57,11 +58,28 @@ public class SocialNetwork {
      * descending order of follower count.
      */
     public static List<String> influencers(Map<String, Set<String>> followsGraph) {
-        List<String> result = new ArrayList<>();
+        Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<String, Set<String>> author : followsGraph.entrySet()) {
-
+            if (!result.containsKey(author.getKey())) {
+                result.put(author.getKey(), 1);
+            } else {
+                int temp = result.get(author.getKey());
+                result.remove(author.getKey());
+                result.put(author.getKey(), temp + 1);
+            }
         }
-        return result;
+        List<Map.Entry<String, Integer>> sortResult = new ArrayList<Map.Entry<String, Integer>>(result.entrySet());
+        Collections.sort(sortResult, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return (o1.getValue()).toString().compareTo(o2.getValue().toString());
+            }
+        });
+        List<String> authorList = new ArrayList<>();
+        for (int i = 0; i < sortResult.size(); i++) {
+            authorList.add(sortResult.get(i).getKey());
+        }
+        return authorList;
     }
 
 }

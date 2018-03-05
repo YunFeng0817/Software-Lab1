@@ -25,10 +25,10 @@ public class FilterTest {
     private static final Instant d3 = Instant.parse("2016-09-01T10:00:00Z");
     private static final Instant d4 = Instant.parse("2016-09-01T11:00:00Z");
 
-    private static final Tweet tweet1 = new Tweet(1, "alyssa", "is it reasonable to talk about rivest so much?", d1);
-    private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
-    private static final Tweet tweet3 = new Tweet(3, "alyssa", "is it reasonable to talk about rivest so much?", d3);
-    private static final Tweet tweet4 = new Tweet(4, "ldldsdkdg", "rivest talk in 30 minutes #hype", d4);
+    private static final Tweet tweet1 = new Tweet(1, "alyssa", "talk is it reasonable to about rivest so much?", d1);
+    private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest in 30 minutes #hype talk", d2);
+    private static final Tweet tweet3 = new Tweet(3, "alyssa", "is it reasonable to  about rivest so much?", d3);
+    private static final Tweet tweet4 = new Tweet(4, "ldldsdkdg", "rivest in 30 minutes #hype", d4);
     @Test(expected=AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
@@ -57,10 +57,10 @@ public class FilterTest {
     
     @Test
     public void testContaining() {
-        List<Tweet> containing = Filter.containing(Arrays.asList(tweet1, tweet2), Arrays.asList("talk"));
+        List<Tweet> containing = Filter.containing(Arrays.asList(tweet1, tweet2,tweet3,tweet4), Arrays.asList("talk","to"));
         
         assertFalse("expected non-empty list", containing.isEmpty());
-        assertTrue("expected list to contain tweets", containing.containsAll(Arrays.asList(tweet1, tweet2)));
+        assertTrue("expected list to contain tweets", containing.containsAll(Arrays.asList(tweet1, tweet2,tweet3)));
         assertEquals("expected same order", 0, containing.indexOf(tweet1));
     }
 

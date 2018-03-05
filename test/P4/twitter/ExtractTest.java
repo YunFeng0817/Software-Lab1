@@ -50,10 +50,8 @@ public class ExtractTest {
     public void testGetMentionedUsersNoMention() {
         Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1,tweet2,tweet3,tweet4));
         Set<String> result = new HashSet<>();
-        result.add("alyssa");
-        result.add("bbitdiddle");
-        result.add("chhfgd");
-        result.add("ldldsdkdg");
+        result.add("lili");
+        result.add("kaka");
         assertEquals("expected empty set",result,mentionedUsers);
     }
 

@@ -206,12 +206,17 @@ public class TurtleSoup {
      * @param args unused
      */
     public static void main(String args[]) {
-        DrawableTurtle turtle = new DrawableTurtle();
-
-        drawPersonalArt(turtle);
+        DrawableTurtle turtle1 = new DrawableTurtle();
+        DrawableTurtle turtle2 = new DrawableTurtle();
+        DrawableTurtle turtle3 = new DrawableTurtle();
+        drawSquare(turtle1,50);
+        drawRegularPolygon(turtle2,6,50);
+        drawPersonalArt(turtle3);
 
         // draw the window
-        turtle.draw();
+        turtle1.draw();
+        turtle2.draw();
+        turtle3.draw();
     }
 
 }

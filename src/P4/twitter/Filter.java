@@ -38,6 +38,20 @@ public class Filter {
     }
 
     /**
+     * @param tweets a list of tweets with distinct ids, not modified by this method.
+     * @return all the author of these tweets and every author username in return list is universal
+     */
+    public static List<String> getAuthor(List<Tweet> tweets) {
+        List<String> result = new ArrayList<String>();
+        for (Tweet tweet : tweets) {
+            if (!result.contains(tweet.getAuthor())) {
+                result.add(tweet.getAuthor());
+            }
+        }
+        return result;
+    }
+
+    /**
      * Find tweets that were sent during a particular timespan.
      *
      * @param tweets   a list of tweets with distinct ids, not modified by this method.

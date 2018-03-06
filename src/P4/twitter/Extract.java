@@ -58,14 +58,15 @@ public class Extract {
      */
     public static Set<String> getMentionedUsers(List<Tweet> tweets) {
         Set<String> MentionedUsers = new HashSet<>();
-        Pattern regex = Pattern.compile("[^\\w\\-]?@[\\w\\-]+");
+        Pattern regex = Pattern.compile("[^\\w\\-]@[\\w\\-]+");
         Matcher matcher;
         for (int i = 0; i < tweets.size(); i++) {
             String temp = tweets.get(i).getText();
-            matcher = regex.matcher(temp);
-            while(matcher.find()) {
-                if(!MentionedUsers.contains(matcher.group().substring(2).toLowerCase()))
-                    MentionedUsers.add(matcher.group().substring(2).toLowerCase());
+            matcher = regex.matcher(" " + temp + " ");
+            while (matcher.find()) {
+                String methionedUsers = matcher.group().substring(2).toLowerCase();
+                if (!MentionedUsers.contains(methionedUsers))
+                    MentionedUsers.add(methionedUsers);
             }
         }
         return MentionedUsers;

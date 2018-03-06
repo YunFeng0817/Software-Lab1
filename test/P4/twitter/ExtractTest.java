@@ -28,7 +28,7 @@ public class ExtractTest {
     private static final Instant d3 = Instant.parse("2016-09-01T10:00:00Z");
     private static final Instant d4 = Instant.parse("2016-09-01T11:00:00Z");
 
-    private static final Tweet tweet1 = new Tweet(1, "alyssa", "is @lili @kaka it reasonable to talk about rivest so much?", d1);
+    private static final Tweet tweet1 = new Tweet(1, "alyssa", " f@miti.coma, nbc @lili @kaka @ it reasonable to talk about rivest so much?", d1);
     private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
     private static final Tweet tweet3 = new Tweet(3, "chhfgd", "is it reasonable to talk about rivest so much?", d3);
     private static final Tweet tweet4 = new Tweet(4, "ldldsdkdg", "rivest talk in 30 minutes #hype", d4);
@@ -52,7 +52,7 @@ public class ExtractTest {
         Set<String> result = new HashSet<>();
         result.add("lili");
         result.add("kaka");
-        assertEquals("expected empty set",result,mentionedUsers);
+        assertEquals(result,mentionedUsers);
     }
 
     /*

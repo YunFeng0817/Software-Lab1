@@ -6,11 +6,8 @@ package test.P4.twitter;
 import P4.twitter.*;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -37,6 +34,16 @@ public class SocialNetworkTest {
     @Test
     public void testInfluencersEmpty() {
         Map<String, Set<String>> followsGraph = new HashMap<>();
+        Set<String> following1 = new HashSet<>();
+        Set<String> following2 = new HashSet<>();
+        following1.add("a");
+        following1.add("b");
+        following1.add("c");
+        following1.add("d");
+        followsGraph.put("f", following1);
+        following2.add("e");
+        following2.add("a");
+        followsGraph.put("g",following2);
         List<String> influencers = SocialNetwork.influencers(followsGraph);
         
         assertTrue("expected empty list", influencers.isEmpty());

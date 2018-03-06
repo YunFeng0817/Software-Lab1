@@ -60,24 +60,27 @@ public class SocialNetwork {
     public static List<String> influencers(Map<String, Set<String>> followsGraph) {
         Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<String, Set<String>> author : followsGraph.entrySet()) {
-            if (!result.containsKey(author.getKey())) {
-                result.put(author.getKey(), 1);
-            } else {
-                int temp = result.get(author.getKey());
-                result.remove(author.getKey());
-                result.put(author.getKey(), temp + 1);
+            for (String following : author.getValue()) {
+                if (result.containsKey(following)) {
+                    int temp = result.get(following);
+                    result.remove(following);
+                    result.put(following, temp + 1);
+                } else {
+                    result.put(following, 1);
+                }
             }
         }
         List<Map.Entry<String, Integer>> sortResult = new ArrayList<Map.Entry<String, Integer>>(result.entrySet());
         Collections.sort(sortResult, new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
-                return (o1.getValue()).toString().compareTo(o2.getValue().toString());
+                return (o2.getValue()).compareTo(o1.getValue());
             }
         });
         List<String> authorList = new ArrayList<>();
         for (int i = 0; i < sortResult.size(); i++) {
             authorList.add(sortResult.get(i).getKey());
+//            System.out.println(sortResult.get(i).getKey().toString() + " " + sortResult.get(i).getValue());
         }
         return authorList;
     }

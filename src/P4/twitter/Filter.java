@@ -31,7 +31,8 @@ public class Filter {
     public static List<Tweet> writtenBy(List<Tweet> tweets, String username) {
         List<Tweet> filterResult = new ArrayList();
         for (int i = 0; i < tweets.size(); i++) {
-            if (tweets.get(i).getAuthor() == username)
+            // string compare must use equal ,don't use ==
+            if (tweets.get(i).getAuthor().equals(username))
                 filterResult.add(tweets.get(i));
         }
         return filterResult;

@@ -28,7 +28,7 @@ public class ExtractTest {
     private static final Instant d3 = Instant.parse("2016-09-01T10:00:00Z");
     private static final Instant d4 = Instant.parse("2016-09-01T11:00:00Z");
 
-    private static final Tweet tweet1 = new Tweet(1, "alyssa", "RT @KrisParonto: We also didn\\u2019t use the @FBI @CIA and @NSAGov to spy on @realDonaldTrump either.......isn\\u2019t that what you said to Chris Wal\\u2026", d1);
+    private static final Tweet tweet1 = new Tweet(1, "alyssa", "RT @claverackjac: \ud83e\udd14@realDonaldTrump \\n\\nThere is one thing trumpy is great at. In fact he's bigly great at it...\\n\\nLetting Americans know each\\u2026", d1);
     private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
     private static final Tweet tweet3 = new Tweet(3, "chhfgd", "is it reasonable to talk about rivest so much?", d3);
     private static final Tweet tweet4 = new Tweet(4, "ldldsdkdg", "rivest talk in 30 minutes #hype", d4);

@@ -3,7 +3,7 @@
  */
 package P4.twitter;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.Set;
 
 /**
  * This is the main program.
- * 
+ * <p>
  * You may change this class if you wish, but you don't have to.
  */
 public class Main {
-    
+
     /**
      * URL of a server that produces a list of tweets sampled from Twitter
      * within the last hour. This server may take up to a minute to respond, if
@@ -31,11 +31,11 @@ public class Main {
             throw new AssertionError(murle);
         }
     }
-    
+
     /**
      * Main method of the program. Fetches a sample of tweets and prints some
      * facts about it.
-     * 
+     *
      * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
@@ -50,20 +50,20 @@ public class Main {
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
-        
+
         // display some characteristics about the tweets
         System.err.println("fetched " + tweets.size() + " tweets");
-        
+
         final Timespan span = Extract.getTimespan(tweets);
         System.err.println("ranging from " + span.getStart() + " to " + span.getEnd());
-        
+
         final Set<String> mentionedUsers = Extract.getMentionedUsers(tweets);
         System.err.println("covers " + mentionedUsers.size() + " Twitter users");
-        
+
         // infer the follows graph
         final Map<String, Set<String>> followsGraph = SocialNetwork.guessFollowsGraph(tweets);
         System.err.println("follows graph has " + followsGraph.size() + " nodes");
-        
+
         // print the top-N influencers
         final int count = 10;
         final List<String> influencers = SocialNetwork.influencers(followsGraph);
@@ -71,5 +71,5 @@ public class Main {
             System.out.println(username);
         }
     }
-    
+
 }

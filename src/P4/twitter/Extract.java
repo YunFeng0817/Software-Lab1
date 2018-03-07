@@ -64,9 +64,10 @@ public class Extract {
             String temp = tweets.get(i).getText();
             matcher = regex.matcher(" " + temp + " ");
             while (matcher.find()) {
-                String methionedUsers = matcher.group().substring(2).toLowerCase();
-                if (!MentionedUsers.contains(methionedUsers))
+                String methionedUsers = matcher.group().substring(matcher.group().indexOf("@")+1).toLowerCase();
+                if (!MentionedUsers.contains(methionedUsers)){
                     MentionedUsers.add(methionedUsers);
+                }
             }
         }
         return MentionedUsers;

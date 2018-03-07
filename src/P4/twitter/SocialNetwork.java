@@ -83,7 +83,7 @@ public class SocialNetwork {
         List<String> authorList = new ArrayList<>();
         for (int i = 0; i < sortResult.size(); i++) {
             authorList.add(sortResult.get(i).getKey());
-            System.out.println(sortResult.get(i).getKey().toString() + " " + sortResult.get(i).getValue());
+//            System.out.println(sortResult.get(i).getKey().toString() + " " + sortResult.get(i).getValue());
         }
         return authorList;
     }

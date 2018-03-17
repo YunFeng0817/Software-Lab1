@@ -60,9 +60,6 @@ public class SocialNetwork {
     public static List<String> influencers(Map<String, Set<String>> followsGraph) {
         Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<String, Set<String>> author : followsGraph.entrySet()) {
-//            if(author.getValue().contains("fbi")){
-//                System.err.println(author.getKey());
-//            }
             for (String following : author.getValue()) {
                 if (result.containsKey(following)) {
                     int temp = result.get(following);
@@ -83,7 +80,6 @@ public class SocialNetwork {
         List<String> authorList = new ArrayList<>();
         for (int i = 0; i < sortResult.size(); i++) {
             authorList.add(sortResult.get(i).getKey());
-//            System.out.println(sortResult.get(i).getKey().toString() + " " + sortResult.get(i).getValue());
         }
         return authorList;
     }

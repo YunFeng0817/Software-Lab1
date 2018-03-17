@@ -48,11 +48,11 @@ public class ExtractTest {
 
     @Test
     public void testGetMentionedUsersNoMention() {
-        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1,tweet2,tweet3,tweet4));
+        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet2, tweet3, tweet4));
         Set<String> result = new HashSet<>();
-        result.add("lili");
-        result.add("kaka");
-        assertEquals(result,mentionedUsers);
+        result.add("realdonaldtrump");
+        result.add("claverackjac");
+        assertEquals(result, mentionedUsers);
     }
 
     /*

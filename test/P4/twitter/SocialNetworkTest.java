@@ -45,8 +45,9 @@ public class SocialNetworkTest {
         following2.add("a");
         followsGraph.put("g",following2);
         List<String> influencers = SocialNetwork.influencers(followsGraph);
-        
-        assertTrue("expected empty list", influencers.isEmpty());
+
+        List<String> result  = Arrays.asList("a","b","c","d","e");
+        assertEquals(result, influencers);
     }
 
     /*

@@ -7,6 +7,8 @@ import org.junit.Assert;
 import P3.FriendshipGraph;
 import P3.Person;
 
+import java.io.*;
+
 /**
  * FriendshipGraph Tester.
  *
@@ -16,87 +18,11 @@ import P3.Person;
  */
 public class FriendshipGraphTest {
 
-    private FriendshipGraph graphTest = new FriendshipGraph(),graphTest1 = new FriendshipGraph();
-    private Person[] persons = new Person[1000],persons1 = new Person[20];
+    private FriendshipGraph graphTest = new FriendshipGraph(), graphTest1 = new FriendshipGraph();
+    private Person[] persons = new Person[1000], persons1 = new Person[20];
 
     @Before
     public void before() throws Exception {
-        /*
-         * test case one
-         */
-        for (int i = 0; i < 1000; i++) {
-            persons[i] = new Person(String.valueOf(i));
-            graphTest.addVertex(persons[i]);
-        }
-        for (int i = 0; i < 999; i++) {
-            graphTest.addEdge(persons[i], persons[i + 1]);
-            graphTest.addEdge(persons[i + 1], persons[i]);
-        }
-        /*
-         * end test case one
-         */
-        
-        /*
-         * test case two
-         */
-        for(int i=0;i<14;i++){
-            persons1[i] = new Person(String.valueOf((int)'a'+i));
-            graphTest1 .addVertex(persons1[i]);
-        }
-        graphTest1.addEdge(persons1[0], persons1[1]);
-        graphTest1.addEdge(persons1[1], persons1[0]);
-
-        graphTest1.addEdge(persons1[1], persons1[2]);
-        graphTest1.addEdge(persons1[2], persons1[1]);
-
-        graphTest1.addEdge(persons1[2], persons1[3]);
-        graphTest1.addEdge(persons1[3], persons1[2]);
-
-        graphTest1.addEdge(persons1[0], persons1[4]);
-        graphTest1.addEdge(persons1[4], persons1[0]);
-
-        graphTest1.addEdge(persons1[0], persons1[7]);
-        graphTest1.addEdge(persons1[7], persons1[0]);
-
-        graphTest1.addEdge(persons1[7], persons1[1]);
-        graphTest1.addEdge(persons1[1], persons1[7]);
-
-        graphTest1.addEdge(persons1[3], persons1[7]);
-        graphTest1.addEdge(persons1[7], persons1[3]);
-
-        graphTest1.addEdge(persons1[4], persons1[5]);
-        graphTest1.addEdge(persons1[5], persons1[4]);
-
-        graphTest1.addEdge(persons1[2], persons1[5]);
-        graphTest1.addEdge(persons1[5], persons1[2]);
-
-        graphTest1.addEdge(persons1[2], persons1[6]);
-        graphTest1.addEdge(persons1[6], persons1[2]);
-
-        graphTest1.addEdge(persons1[3], persons1[6]);
-        graphTest1.addEdge(persons1[6], persons1[3]);
-
-        graphTest1.addEdge(persons1[2], persons1[8]);
-        graphTest1.addEdge(persons1[8], persons1[2]);
-
-        graphTest1.addEdge(persons1[9], persons1[10]);
-        graphTest1.addEdge(persons1[10], persons1[9]);
-
-        graphTest1.addEdge(persons1[10], persons1[11]);
-        graphTest1.addEdge(persons1[11], persons1[10]);
-
-        graphTest1.addEdge(persons1[11], persons1[12]);
-        graphTest1.addEdge(persons1[12], persons1[11]);
-
-        graphTest1.addEdge(persons1[12], persons1[13]);
-        graphTest1.addEdge(persons1[13], persons1[12]);
-
-        graphTest1.addEdge(persons1[9], persons1[12]);
-        graphTest1.addEdge(persons1[12], persons1[9]);
-
-        /*
-         * end test case two
-         */
     }
 
     @After
@@ -108,10 +34,23 @@ public class FriendshipGraphTest {
      */
     @Test
     public void testAddVertex() throws Exception {
-//TODO: Test goes here...
+        /*
+         * test case one
+         */
         for (int i = 0; i < 1000; i++) {
             persons[i] = new Person(String.valueOf(i));
             graphTest.addVertex(persons[i]);
+        }
+         /*
+         * end test case one
+         */
+
+        /*
+         * test case two
+         */
+        for (int i = 0; i < 14; i++) {
+            persons1[i] = new Person(String.valueOf((int) 'a' + i));
+            graphTest1.addVertex(persons1[i]);
         }
     }
 
@@ -120,11 +59,33 @@ public class FriendshipGraphTest {
      */
     @Test
     public void testAddEdge() throws Exception {
-//TODO: Test goes here...
+        testAddVertex();
+        /*
+         * test case one
+         */
         for (int i = 0; i < 999; i++) {
             graphTest.addEdge(persons[i], persons[i + 1]);
             graphTest.addEdge(persons[i + 1], persons[i]);
         }
+        /*
+         * end test case one
+         */
+
+        /*
+         * test case two
+         * read data from file to avoid add them in my code
+         */
+        BufferedReader content = new BufferedReader(new FileReader("./test/P3/edge.txt"));
+        String line;
+        String[] integer;
+        while ((line = content.readLine()) != null) {
+            integer = line.split(" ");
+            graphTest1.addEdge(persons1[Integer.parseInt(integer[0])], persons1[Integer.parseInt(integer[1])]);
+        }
+        content.close();
+        /*
+         * end test case two
+         */
     }
 
     /**
@@ -132,7 +93,7 @@ public class FriendshipGraphTest {
      */
     @Test
     public void testGetDistance() throws Exception {
-//TODO: Test goes here...
+        testAddEdge();
         /*
          * test case one
          */
@@ -146,12 +107,12 @@ public class FriendshipGraphTest {
         /*
          * test case two
          */
-        Assert.assertEquals(2,graphTest1.getDistance(persons1[0],persons1[5]));
-        Assert.assertEquals(3,graphTest1.getDistance(persons1[0],persons1[6]));
-        Assert.assertEquals(2,graphTest1.getDistance(persons1[0],persons1[3]));
-        Assert.assertEquals(-1,graphTest1.getDistance(persons1[0],persons1[9]));
-        Assert.assertEquals(2,graphTest1.getDistance(persons1[9],persons1[13]));
-        Assert.assertEquals(2,graphTest1.getDistance(persons1[2],persons1[7]));
+        Assert.assertEquals(2, graphTest1.getDistance(persons1[0], persons1[5]));
+        Assert.assertEquals(3, graphTest1.getDistance(persons1[0], persons1[6]));
+        Assert.assertEquals(2, graphTest1.getDistance(persons1[0], persons1[3]));
+        Assert.assertEquals(-1, graphTest1.getDistance(persons1[0], persons1[9]));
+        Assert.assertEquals(2, graphTest1.getDistance(persons1[9], persons1[13]));
+        Assert.assertEquals(2, graphTest1.getDistance(persons1[2], persons1[7]));
         /*
          * end test case two
          */
